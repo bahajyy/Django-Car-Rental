@@ -38,8 +38,20 @@ class Car(models.Model):
 
     @staticmethod
     def get_available_cars(start_date, end_date, city):
-        return Car.objects.all()
-
+        start_date = datetime.strptime(start_date, '%Y-%m-%d').date()
+        end_date = datetime.strptime(end_date, '%Y-%m-%d').date() + timedelta(days=1)  
+        return Car.objects.filter(
+            Q(
+                available_start_date__lte=start_date,
+                available_end_date__gte=end_date,
+                city=city
+            ) |
+            Q(
+                available_start_date__gte=start_date,
+                available_start_date__lte=end_date,
+                city=city
+            )
+        ).distinct()
 class Client(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     country = models.CharField(max_length=255)
