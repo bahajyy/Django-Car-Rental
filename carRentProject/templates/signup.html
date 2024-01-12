@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up - RentCar{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h1 class="display-4 mb-4 text-center">Üye Ol</h1>
+    <form method="post" action="{% url 'signup' %}" onsubmit="return validatePassword()">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" name="email" id="email" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Şifre</label>
+        <input type="password" name="password" id="password" class="form-control" required>
+        <small id="passwordHelp" class="form-text text-muted">En az 8 karakter, 1 sayı ve 1 alfanümerik karakter içermelidir.</small>
+      </div>
+      <div class="mb-3">
+        <label for="password_confirm" class="form-label">Şifre Tekrarı</label>
+        <input type="password" name="password_confirm" id="password_confirm" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="country" class="form-label">Ülke</label>
+        <input type="text" name="country" id="country" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="city" class="form-label">Şehir</label>
+        <select name="city" id="city" class="form-select" required>
+          <option value="istanbul">İstanbul</option>
+          <option value="ankara">Ankara</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary w-100 mb-3">Kayıt Ol</button>
+    </form>
+  </div>
+
+  <script>
+    function validatePassword() {
+      var password = document.getElementById("password").value;
+      var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+      if (!passwordRegex.test(password)) {
+        alert("Şifre en az 8 karakter, 1 sayı ve 1 alfanümerik karakter içermelidir.");
+        return false;
+      }
+
+      return true;
+    }
+  </script>
+{% endblock %}

@@ -1,0 +1,53 @@
+<!-- home.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Home - RentCar{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h1 class="display-4 mb-4 text-center">Hoş geldin, {{ Client.username }}</h1>
+    <h1 class="display-4 mb-4 text-center">Hemen sana uygun arabaları bul!</h1>
+
+    <!-- Filtreleme ve Arama Formu -->
+    <form method="GET" action="{% url 'search_results' %}" class="mb-4" id="searchForm">
+      <div class="row justify-content-center">
+        <div class="col-md-3 mb-3">
+          <label for="start_date" class="form-label">Ne zaman teslim alacaksınız?</label>
+          <input type="date" name="start_date" id="start_date" class="form-control">
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="end_date" class="form-label">Ne zaman teslim edeceksiniz?</label>
+          <input type="date" name="end_date" id="end_date" class="form-control">
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="city" class="form-label">Hangi Ofisten Alacaksınız?</label>
+          <div>  
+            <select name="city" id="city" class="form-select w-100">
+              <option value="bornova">Bornova</option>
+              <option value="alsancak">Alsancak</option>
+              <option value="gaziemir">Gaziemir</option>
+            </select>
+          </div>   
+        </div>
+        <div class="col-md-2 mb-3">
+          <button type="submit" class="btn btn-secondary w-100 h-100">Ara</button>
+        </div>
+      </div>
+    </form>
+    <hr class="my-5">
+
+    <iframe width="1090" height="450" style="border:0;" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/search?q=avis%20%C5%9Fubeleri&key=AIzaSyC6vwkKzi-cOEy1dxkZqcfLg33WNLT8z5M"></iframe>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#searchForm').submit(function(e) {
+        e.preventDefault();  
+        window.location.href = "{% url 'search_results' %}?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val() + "&city=" + $('#city').val();
+      });
+    });
+  </script>
+{% endblock %}

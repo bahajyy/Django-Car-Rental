@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - RentCar{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    <div class="text-center mb-4">
+      <button class="btn btn-danger">Google ile Giriş Yap</button>
+    </div>
+    <form method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" name="email" id="email" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Şifre</label>
+        <input type="password" name="password" id="password" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary w-100 mb-3" href="{% url 'home' %}">Giriş Yap</button>
+    </form>
+    <div class="text-center">
+      <p class="mb-3">Hesabınız yok mu? <a href="{% url 'signup' %}">Üye Ol</a></p>
+    </div>
+  </div>
+{% endblock %}

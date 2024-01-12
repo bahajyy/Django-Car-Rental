@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Results - RentCar{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h1 class="display-4 mb-4 text-center">Arama Sonuçları</h1>
+
+    <form method="get" action="{% url 'search_results' %}" class="mb-4">
+      <div class="row justify-content-end">
+        <div class="col-md-3 mb-3">
+          <label for="brand" class="form-label">Marka</label>
+          <select name="brand" id="brand" class="form-select">
+            <option value="">Hepsi</option>
+            <option value="Fiat">Fiat</option>
+            <option value="Renault">Renault</option>
+          </select>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="price_sort" class="form-label">Fiyata Göre Sırala</label>
+          <select name="price_sort" id="price_sort" class="form-select">
+            <option value="asc">Azdan Çoğa</option>
+            <option value="desc">Çoktan Aza</option>
+          </select>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="transmission" class="form-label">Şanzıman Tipi</label>
+          <select name="transmission" id="transmission" class="form-select">
+            <option value="">Hepsi</option>
+            <option value="Automatic">Otomatik</option>
+            <option value="Manual">Manuel</option>
+          </select>
+        </div>
+        <div class="col-md-2 mb-3">
+          <button type="submit" class="btn btn-secondary w-100 h-100">Uygula</button>
+        </div>
+      </div>
+    </form>
+
+    <div class="row">
+      {% for car in cars %}
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="{{ car.photo.url }}" class="card-img-top" alt="{{ car.city }}">
+            <div class="card-body">
+              <h5 class="card-title">{{ car.brand }} {{ car.model }} - {{ car.transmission }}</h5>
+              <p class="card-text">
+                <strong>Depozito:</strong> {{ car.deposit }}<strong> Türk lirası</strong> <br>
+                <strong>Kilometre:</strong> {{ car.mileage }}<br>
+                <strong>Günlük Ücret:</strong> {{ car.cost_of_rental }}<strong> Türk lirası</strong> 
+              </p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
