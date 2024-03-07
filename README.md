@@ -1,10 +1,5 @@
 # Se3355FinalProject
 
-Projeyi ve deploymentı gösterdiğim video linki:
-(Azure para çektiği için videodan sonra deployment ve webappi kaldırıyorum)
-https://www.youtube.com/watch?v=kAD9Yg2zwQI
-
-
 The Django project aims to create a comprehensive car rental system with three primary models: UserProfile, Car, and Client. The built-in User model is utilized for user authentication, while the Client model extends the user profile, incorporating additional details such as country and city. This one-to-one relationship between a user and a client ensures a seamless integration of user-specific information.
 
 The UserProfile model serves as a repository for user-related data, encompassing fields like email, password, country, and city. The model's __str__ method enhances its representation by returning the user's email.
