@@ -1,4 +1,4 @@
-# Se3355FinalProject
+
 
 The Django project aims to create a comprehensive car rental system with three primary models: UserProfile, Car, and Client. The built-in User model is utilized for user authentication, while the Client model extends the user profile, incorporating additional details such as country and city. This one-to-one relationship between a user and a client ensures a seamless integration of user-specific information.
 
